@@ -29,7 +29,7 @@ public class UserService {
         user.setNom(request.getNom());
         user.setEmail(request.getEmail());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setRole(User.Role.USER); // Par défaut, les nouveaux utilisateurs ont le rôle USER
+        user.setRole(User.Role.USER);
 
         return userRepository.save(user);
     }

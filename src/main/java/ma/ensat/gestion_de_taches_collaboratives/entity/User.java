@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.scheduling.config.Task;
+import ma.ensat.gestion_de_taches_collaboratives.entity.Task;
 
 import java.util.ArrayList;
 import java.util.List;
