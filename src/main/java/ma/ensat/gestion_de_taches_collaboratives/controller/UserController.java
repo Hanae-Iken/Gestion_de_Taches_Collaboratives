@@ -1,6 +1,7 @@
 package ma.ensat.gestion_de_taches_collaboratives.controller;
 
 import jakarta.validation.Valid;
+import ma.ensat.gestion_de_taches_collaboratives.dto.ChangePasswordRequest;
 import ma.ensat.gestion_de_taches_collaboratives.dto.CreateUserRequest;
 import ma.ensat.gestion_de_taches_collaboratives.entity.User;
 import ma.ensat.gestion_de_taches_collaboratives.service.UserDetailsImpl;
@@ -45,5 +46,16 @@ public class UserController {
     public ResponseEntity<User> getUserById(@PathVariable Long id) {
         User user = userService.getUserById(id);
         return ResponseEntity.ok(user);
+    }
+
+    @PatchMapping("/{id}/password")
+    @PreAuthorize("@userSecurity.isCurrentUser(#id, authentication)")
+    public ResponseEntity<User> changePassword(
+            @PathVariable Long id,
+            @Valid @RequestBody ChangePasswordRequest request,
+            @AuthenticationPrincipal UserDetailsImpl userDetails) {
+
+        User updatedUser = userService.changePassword(id, request, userDetails.getUser());
+        return ResponseEntity.ok(updatedUser);
     }
 }
